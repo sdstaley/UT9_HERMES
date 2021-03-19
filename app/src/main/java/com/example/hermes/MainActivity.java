@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity {
     String[] mobileArray = {"Michael","Jim","Pam","Dwight",
             "Ryan","Angela","Kevin","Corporate"};
 
-
+    // test
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
