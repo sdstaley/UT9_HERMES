@@ -18,7 +18,7 @@ public class ServicesActivity extends AppCompatActivity {
     String[] mobileArray = {"Text","Email","Facebook","Instagram",
             "Twitter","WhatsApp","Discord","Slack"};
 
-    //test
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
