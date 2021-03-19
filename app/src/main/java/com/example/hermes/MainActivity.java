@@ -10,7 +10,9 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 import android.view.View;
 
-public class MainActivity extends Activity {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
     // Array of strings...
     String[] mobileArray = {"Michael","Jim","Pam","Dwight",
             "Ryan","Angela","Kevin","Corporate"};
@@ -24,14 +26,20 @@ public class MainActivity extends Activity {
         ArrayAdapter adapter = new ArrayAdapter<String>(this,
                 R.layout.activity_listview, mobileArray);
 
+
         ListView listView = (ListView) findViewById(R.id.mobile_list);
         listView.setAdapter(adapter);
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int pos, long id) {
-                startActivity(new Intent(getApplicationContext(), ServicesActivity.class));
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                switchActivities();
                 return false;
             }
         });
+    }
+
+    private void switchActivities() {
+        Intent switchActivityIntent = new Intent(this, ServicesActivity.class);
+        startActivity(switchActivityIntent);
     }
 }
