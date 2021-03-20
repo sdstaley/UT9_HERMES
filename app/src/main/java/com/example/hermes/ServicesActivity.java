@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 import android.view.View;
 
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ServicesActivity extends AppCompatActivity {
@@ -29,6 +30,13 @@ public class ServicesActivity extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.mobile_list);
         listView.setAdapter(adapter);
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                switchActivities2();
+                return false;
+            }
+        });
 
         View switchToSecondActivity = findViewById(R.id.back_button1);
         switchToSecondActivity.setOnClickListener(new View.OnClickListener() {
@@ -41,6 +49,10 @@ public class ServicesActivity extends AppCompatActivity {
 
     private void switchActivities() {
         Intent switchActivityIntent = new Intent(this, MainActivity.class);
+        startActivity(switchActivityIntent);
+    }
+    private void switchActivities2() {
+        Intent switchActivityIntent = new Intent(this, SendText.class);
         startActivity(switchActivityIntent);
     }
 }

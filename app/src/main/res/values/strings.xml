@@ -2,5 +2,6 @@
     <string name="app_name">Hermes</string>
     <string name="action_settings">Settings</string>
     <string name="MainActivity_label">MainActivity_label</string>
+    <string name="LoginActivity_label">LoginActivity_label</string>
 
 </resources>
