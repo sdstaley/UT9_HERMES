@@ -17,11 +17,18 @@ public class SendText extends Activity {
             public void onClick(View v) {
                 sendSMS();
             }
+            /*
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                sendSMS();
+            }
+
+             */
 
         });
     }
 
-    protected void sendSMS(){
+    public void sendSMS(){
 
     }
     /*
