@@ -1,15 +1,9 @@
 package com.example.hermes;
-
-
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
-import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.AdapterView;
 
 public class SendText extends Activity {
     @Override
@@ -17,13 +11,23 @@ public class SendText extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.text_message);
 
-        Button startBtn = (Button) findViewById(R.id.button);
-        startBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
+        Button startBtn = (Button) findViewById(R.id.sendButton);
+        startBtn.setOnClickListener(new AdapterView.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 sendSMS();
             }
+
         });
     }
+
+    protected void sendSMS(){
+
+    }
+    /*
+
+    This is Sean's work... Not finished but is a start.
+
 
     protected void sendSMS() {
         Log.i("Send SMS", "");
@@ -50,4 +54,8 @@ public class SendText extends Activity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+
+     */
+
 }

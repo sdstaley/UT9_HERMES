@@ -30,14 +30,16 @@ public class ServicesActivity extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.mobile_list);
         listView.setAdapter(adapter);
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+        // Listener function checking to see if any of the services are clicked on by user.
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switchActivities2();
-                return false;
             }
         });
 
+        // This is for the back button.
         View switchToSecondActivity = findViewById(R.id.back_button1);
         switchToSecondActivity.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,11 +48,13 @@ public class ServicesActivity extends AppCompatActivity {
             }
         });
     }
-
+    // Switch activity to go to the main activity page, aka 'MainActivity' class
     private void switchActivities() {
         Intent switchActivityIntent = new Intent(this, MainActivity.class);
         startActivity(switchActivityIntent);
     }
+
+    // Switch activity to go to the messaging, 'SendText' class
     private void switchActivities2() {
         Intent switchActivityIntent = new Intent(this, SendText.class);
         startActivity(switchActivityIntent);

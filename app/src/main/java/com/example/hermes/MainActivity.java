@@ -13,31 +13,27 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    // Array of strings...
+    // Creates a list of strings with names of each contact.
     String[] mobileArray = {"Michael","Jim","Pam","Dwight",
             "Ryan","Angela","Kevin","Corporate"};
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         ArrayAdapter adapter = new ArrayAdapter<String>(this,
                 R.layout.activity_listview, mobileArray);
-
-
         ListView listView = (ListView) findViewById(R.id.mobile_list);
         listView.setAdapter(adapter);
-        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+
+        // Just a listener function that listens for the user's click.
+        // If it happens, then we call switchActivities function.
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switchActivities();
-                return false;
             }
         });
     }
-
     private void switchActivities() {
         Intent switchActivityIntent = new Intent(this, ServicesActivity.class);
         startActivity(switchActivityIntent);
