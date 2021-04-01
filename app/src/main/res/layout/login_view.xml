@@ -9,12 +9,41 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:text="LOGIN" />
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="match_parent"
+        android:background="#03A9F4"
+        android:text="HERMES"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
+        android:textColor="#FFFFFF"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_vertical"/>
+
+    <EditText
+        android:id="@+id/editTextEmailAddress"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login">
+        android:layout_gravity="center"
+        android:layout_marginTop="150dp"
+        android:hint="Email address"
+        android:ems="10"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/editTextPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:hint="Password"
+        android:ems="10"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/buttonLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:text="Login"
+        android:ems="5">
 
     </Button>
 
