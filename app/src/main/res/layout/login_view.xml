@@ -1,30 +1,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#7949CF"
     android:orientation="vertical"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="#03A9F4"
-        android:text="HERMES"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display3"
-        android:textColor="#FFFFFF"
-        android:gravity="center_horizontal"
-        android:layout_gravity="center_vertical"/>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="146dp"
+        android:layout_marginTop="100dp"
+        app:srcCompat="@drawable/hermeslogo" />
 
     <EditText
         android:id="@+id/editTextEmailAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="150dp"
-        android:hint="Email address"
+        android:layout_marginTop="68dp"
         android:ems="10"
-        android:inputType="textEmailAddress" />
+        android:hint="E-Mail Address"
+        android:inputType="textEmailAddress"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#7AFFFFFF" />
 
     <EditText
         android:id="@+id/editTextPassword"
@@ -32,22 +33,21 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
-        android:hint="Password"
         android:ems="10"
-        android:inputType="textPassword" />
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textColor="#FFFFFF"
+        android:textColorHint="#7AFFFFFF" />
 
     <Button
         android:id="@+id/buttonLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="207dp"
+        android:layout_height="40dp"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="Login"
-        android:ems="5">
-
-    </Button>
-
-
-
+        android:layout_marginTop="25dp"
+        android:background="@drawable/buttonbackground"
+        android:ems="10"
+        android:text="LOG IN"
+        app:backgroundTint="#2196F3"></Button>
 
 </LinearLayout>
