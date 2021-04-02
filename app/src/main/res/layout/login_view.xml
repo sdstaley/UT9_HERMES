@@ -24,6 +24,7 @@
         android:ems="10"
         android:hint="E-Mail Address"
         android:inputType="textEmailAddress"
+        android:text="john_silver@gmail.com"
         android:textColor="#FFFFFF"
         android:textColorHint="#7AFFFFFF" />
 
@@ -36,6 +37,7 @@
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
+        android:text="johnsilver"
         android:textColor="#FFFFFF"
         android:textColorHint="#7AFFFFFF" />
 
