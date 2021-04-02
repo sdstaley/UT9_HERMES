@@ -11,7 +11,7 @@ public class SendText extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.text_message);
 
-        Button startBtn = (Button) findViewById(R.id.sendButton);
+        Button startBtn = (Button) findViewById(R.id.buttonSend);
         startBtn.setOnClickListener(new AdapterView.OnClickListener() {
             @Override
             public void onClick(View v) {
