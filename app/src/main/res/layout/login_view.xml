@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#7949CF"
+    android:background="#262323"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -48,6 +48,6 @@
         android:background="@drawable/buttonbackground"
         android:ems="10"
         android:text="LOG IN"
-        app:backgroundTint="#2196F3"></Button>
+        app:backgroundTint="#3B56A6"></Button>
 
 </LinearLayout>
