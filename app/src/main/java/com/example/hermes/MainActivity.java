@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         List<String> list = new ArrayList<>();
-
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 

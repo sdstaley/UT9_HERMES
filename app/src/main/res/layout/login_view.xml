@@ -48,6 +48,6 @@
         android:background="@drawable/buttonbackground"
         android:ems="10"
         android:text="LOG IN"
-        app:backgroundTint="#2196F3"></Button>
+        app:backgroundTint="#3B56A6"></Button>
 
 </LinearLayout>
