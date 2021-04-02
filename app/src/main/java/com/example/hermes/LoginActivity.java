@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-    
+
     private void loginMethod(String email, String password) {
         mAuth.signInWithEmailAndPassword(this.email, this.password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
