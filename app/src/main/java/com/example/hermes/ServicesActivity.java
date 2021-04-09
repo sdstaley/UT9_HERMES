@@ -3,27 +3,20 @@ package com.example.hermes;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.AdapterView;
-import android.view.View;
-
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-
-import org.parceler.Parcels;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +55,11 @@ public class ServicesActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             Log.i(TAG, list.toString());
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                list.add(document.get("used-services").toString());
+                                // update to fix array issue. angela's services.
+                                //list.add(document.get("used-services").toString());
+                                list.add(document.getString("1"));
+                                list.add(document.getString("2"));
+                                list.add(document.getString("3"));
                             }
                             adapter = new ArrayAdapter<String>(ServicesActivity.this.getApplicationContext(), android.R.layout.simple_list_item_1,  list);
                             messagingServicesListView = (ListView) findViewById(R.id.messagingServicesListView);
