@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,11 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
+
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter adapter;
     private ListView contactsListView;
     private List<String> list;
+    private Map<String, String> viewList ;
+
+
     // Firebase Fields
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth mAuth;
@@ -35,26 +44,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         list = new ArrayList<>();
+        viewList = new HashMap<>();
+
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-//
-//        db.collection("hermes-contacts")
-//                .get()
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                        if (task.isSuccessful()) {
-//                            for (QueryDocumentSnapshot document : task.getResult()) {
-//                                Log.d(TAG, document.getId() + " => " + document.getData());
-//                            }
-//                        } else {
-//                            Log.d(TAG, "Error getting documents: ", task.getException());
-//                        }
-//                    }
-//                });
-
 
         //Get document names from collection
         db.collection(contactsFirestore).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -64,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.i(TAG, list.toString());
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         list.add(document.getString("name"));
+                        viewList.put(document.getString("name"), document.getId());
                     }
                         adapter = new ArrayAdapter<String>(MainActivity.this.getApplicationContext(), android.R.layout.simple_list_item_1,  list);
                         contactsListView = (ListView) findViewById(R.id.messagingServicesListView);
@@ -71,7 +66,12 @@ public class MainActivity extends AppCompatActivity {
                         contactsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                                switchActivities();
+
+
+                                String clickedItem = (String) (parent.getItemAtPosition(position));
+                                String documentName = viewList.get(clickedItem);
+                                switchActivities(documentName);
+                                Toast.makeText(getApplicationContext(), "You clicked on " + documentName, Toast.LENGTH_LONG ).show();
                             }
                         });
 
@@ -83,8 +83,11 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void switchActivities() {
-        Intent switchActivityIntent = new Intent(this, ServicesActivity.class);
+
+
+    private void switchActivities( String documentNameParameter ) {
+        Intent switchActivityIntent = new Intent(MainActivity.this, ServicesActivity.class);
+        switchActivityIntent.putExtra("NAME", documentNameParameter);
         startActivity(switchActivityIntent);
     }
 }

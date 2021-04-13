@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,39 +48,30 @@ public class ServicesActivity extends AppCompatActivity {
 
         //Get messaging services document from each contact
         db
-               .collection(contactsFirestore)
-               .document("0fwpEjkp6gSNfTlrO7s2")
-               .collection(messagingServicesFirestore).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            Log.i(TAG, list.toString());
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                // update to fix array issue. angela's services.
-                                //list.add(document.get("used-services").toString());
-                                list.add(document.getString("1"));
-                                list.add(document.getString("2"));
-                                list.add(document.getString("3"));
-                            }
-                            adapter = new ArrayAdapter<String>(ServicesActivity.this.getApplicationContext(), android.R.layout.simple_list_item_1,  list);
-                            messagingServicesListView = (ListView) findViewById(R.id.messagingServicesListView);
-                            messagingServicesListView.setAdapter(adapter);
-                            messagingServicesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                                @Override
-                                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                                    switchActivities2();
-                                }
-                            });
-
-                        } else {
-                            Log.e(TAG, "Error getting documents: ", task.getException());
-                        }
-
+                .collection(contactsFirestore)
+                .document(getIntent().getStringExtra("NAME"))
+                .collection(messagingServicesFirestore).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    Log.i(TAG, list.toString());
+                    for (QueryDocumentSnapshot document : task.getResult()) {
+                        list.add(document.getString("platform"));
                     }
-                });;
-
-
+                    adapter = new ArrayAdapter<String>(ServicesActivity.this.getApplicationContext(), android.R.layout.simple_list_item_1,  list);
+                    messagingServicesListView = (ListView) findViewById(R.id.messagingServicesListView);
+                    messagingServicesListView.setAdapter(adapter);
+                    messagingServicesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            switchActivities2();
+                        }
+                    });
+                } else {
+                    Log.e(TAG, "Error getting documents: ", task.getException());
+                }
+            }
+        });
 
         // This is for the back button.
         View switchToSecondActivity = findViewById(R.id.back_button1);
@@ -103,3 +95,5 @@ public class ServicesActivity extends AppCompatActivity {
         startActivity(switchActivityIntent);
     }
 }
+
+
