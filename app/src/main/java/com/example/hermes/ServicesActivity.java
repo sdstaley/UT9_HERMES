@@ -3,6 +3,7 @@ package com.example.hermes;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -58,13 +59,25 @@ public class ServicesActivity extends AppCompatActivity {
                     for (QueryDocumentSnapshot document : task.getResult()) {
                         list.add(document.getString("platform"));
                     }
-                    adapter = new ArrayAdapter<String>(ServicesActivity.this.getApplicationContext(), android.R.layout.simple_list_item_1,  list);
+                    adapter = new ArrayAdapter<String>(ServicesActivity.this.getApplicationContext(), android.R.layout.simple_list_item_multiple_choice,  list);
                     messagingServicesListView = (ListView) findViewById(R.id.messagingServicesListView);
                     messagingServicesListView.setAdapter(adapter);
+                    messagingServicesListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+                    messagingServicesListView.setItemChecked(0, true);
                     messagingServicesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            switchActivities2();
+                            SparseBooleanArray checkedPositions = messagingServicesListView.getCheckedItemPositions();
+                            if (checkedPositions != null) {
+                                for (int i=0; i<checkedPositions.size(); i++) {
+                                    if (checkedPositions.valueAt(i)) {
+                                        String item = messagingServicesListView.getAdapter().getItem(
+                                                checkedPositions.keyAt(i)).toString();
+                                        Log.i(TAG,item + " was selected");
+                                    }
+                                }
+                            }
+//                            switchActivities2();
                         }
                     });
                 } else {
