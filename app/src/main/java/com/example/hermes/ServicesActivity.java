@@ -63,7 +63,7 @@ public class ServicesActivity extends AppCompatActivity {
                     messagingServicesListView = (ListView) findViewById(R.id.messagingServicesListView);
                     messagingServicesListView.setAdapter(adapter);
                     messagingServicesListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-                    messagingServicesListView.setItemChecked(0, true);
+                    messagingServicesListView.setItemChecked(0, false);
                     messagingServicesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
