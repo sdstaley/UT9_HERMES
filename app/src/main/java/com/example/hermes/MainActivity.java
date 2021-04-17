@@ -1,16 +1,21 @@
 package com.example.hermes;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -21,9 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 import java.util.List;
 
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private ListView contactsListView;
     private List<String> list;
     private Map<String, String> viewList ;
+    private Toolbar toolbar;
+    private Button signoutButton;
 
 
     // Firebase Fields
@@ -44,8 +49,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        toolbar = findViewById(R.id.toolbarMA);
+        setSupportActionBar(toolbar);
+
+        signoutButton = findViewById(R.id.buttonSignOut);
+        dialogSignOut(signoutButton);
+
         list = new ArrayList<>();
         viewList = new HashMap<>();
+
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -82,6 +95,36 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void dialogSignOut(View view){
+        signoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder ad = new AlertDialog.Builder(MainActivity.this);
+                ad.setMessage("Are you sure you want to sign out?").setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                        logOut();
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                           dialogInterface.cancel();
+                        }
+                    });
+                AlertDialog alertDialog = ad.create();
+                alertDialog.setTitle("Hermes");
+                alertDialog.show();
+            }
+        });
+    }
+
+    private void logOut() {
+        Intent logoutIntent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(logoutIntent);
+        finish();
+    }
 
 
     private void switchActivities( String documentNameParameter ) {

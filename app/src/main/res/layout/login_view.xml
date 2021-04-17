@@ -49,7 +49,7 @@
         android:layout_marginTop="25dp"
         android:background="@drawable/buttonbackground"
         android:ems="10"
-        android:text="LOG IN"
+        android:text="SIGN IN"
         app:backgroundTint="#3B56A6"></Button>
 
 </LinearLayout>

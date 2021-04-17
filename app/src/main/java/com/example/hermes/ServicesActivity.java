@@ -1,5 +1,6 @@
 package com.example.hermes;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -7,11 +8,13 @@ import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -32,6 +35,8 @@ public class ServicesActivity extends AppCompatActivity {
     private ArrayAdapter adapter;
     private ListView messagingServicesListView;
     public Task<QuerySnapshot> task;
+    private Toolbar toolbar;
+    private Button signoutButton;
 
 
     // Firebase Fields
@@ -43,9 +48,16 @@ public class ServicesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.services_listview);
 
+        toolbar = findViewById(R.id.toolbarSA);
+        setSupportActionBar(toolbar);
+
+        signoutButton = findViewById(R.id.buttonSignOut);
+        dialogSignOut(signoutButton);
+
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         list = new ArrayList<>();
+
 
         //Get messaging services document from each contact
         db
@@ -94,6 +106,36 @@ public class ServicesActivity extends AppCompatActivity {
                 switchActivities();
             }
         });
+    }
+    private void dialogSignOut(View view){
+        signoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder ad = new AlertDialog.Builder(ServicesActivity.this);
+                ad.setMessage("Are you sure you want to sign out?").setCancelable(false)
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                logOut();
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        });
+                AlertDialog alertDialog = ad.create();
+                alertDialog.setTitle("Hermes");
+                alertDialog.show();
+            }
+        });
+    }
+
+    private void logOut() {
+        Intent logoutIntent = new Intent(ServicesActivity.this, LoginActivity.class);
+        startActivity(logoutIntent);
+        finish();
     }
 
     // Switch activity to go to the main activity page, aka 'MainActivity' class

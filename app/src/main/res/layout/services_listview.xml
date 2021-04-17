@@ -2,24 +2,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#00BCD4"
     android:orientation="vertical"
-    tools:context=".MainActivity" >
+    tools:context=".MainActivity">
+
+    <include layout="@layout/messagingservice_toolbar" />
 
     <ListView
         android:id="@+id/messagingServicesListView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
+        android:layout_height="wrap_content"></ListView>
 
     <Button
         android:id="@+id/back_button1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Back"
-        >
+        android:background="#2E6591"
+        android:text="Back">
 
     </Button>
-
 
 
 </LinearLayout>
