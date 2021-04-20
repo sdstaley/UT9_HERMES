@@ -4,13 +4,17 @@ import android.app.Activity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.AdapterView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class SendText extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Toast.makeText(getApplicationContext(),"TEXT" + getIntent().getStringExtra("PLATFROMS_SELECTED"), Toast.LENGTH_LONG).show();
         setContentView(R.layout.text_message);
-
+        TextView textView = (TextView) findViewById(R.id.platformToSendMessage);
+        textView.setText(getIntent().getStringExtra("PLATFROMS_SELECTED"));
         Button startBtn = (Button) findViewById(R.id.buttonSend);
         startBtn.setOnClickListener(new AdapterView.OnClickListener() {
             @Override

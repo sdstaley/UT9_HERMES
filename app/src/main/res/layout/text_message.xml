@@ -5,16 +5,23 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".SendText">
-
-
     <TextView
-        android:id="@+id/textViewMessage"
+        android:id="@+id/platformToSendMessage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="bottom"
-        android:text="Messages will appear in this box"
+        android:text=" "
         app:layout_constraintBottom_toTopOf="@+id/editTextMessage"
         android:layout_marginBottom="200dp"/>
+
+    <!--    <TextView-->
+    <!--        android:id="@+id/textViewMessage"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:gravity="bottom"-->
+    <!--        android:text="Messages will appear in this box"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/editTextMessage"-->
+    <!--        android:layout_marginBottom="200dp"/>-->
 
     <EditText
         android:id="@+id/editTextMessage"

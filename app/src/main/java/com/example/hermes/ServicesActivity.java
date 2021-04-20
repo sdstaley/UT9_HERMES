@@ -31,7 +31,9 @@ public class ServicesActivity extends AppCompatActivity {
     private static String TAG = "ServicesActivity";
     public String contactsFirestore = "hermes-contacts";
     public String messagingServicesFirestore = "personal-messagingservices";
+    String item;
     private List<String> list;
+    private List<String> itemList;
     private ArrayAdapter adapter;
     private ListView messagingServicesListView;
     public Task<QuerySnapshot> task;
@@ -57,6 +59,7 @@ public class ServicesActivity extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         list = new ArrayList<>();
+        itemList = new ArrayList<>();
 
 
         //Get messaging services document from each contact
@@ -75,7 +78,7 @@ public class ServicesActivity extends AppCompatActivity {
                     messagingServicesListView = (ListView) findViewById(R.id.messagingServicesListView);
                     messagingServicesListView.setAdapter(adapter);
                     messagingServicesListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
-                    messagingServicesListView.setItemChecked(0, false);
+                    messagingServicesListView.setItemChecked(0, true);
                     messagingServicesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -83,11 +86,21 @@ public class ServicesActivity extends AppCompatActivity {
                             if (checkedPositions != null) {
                                 for (int i=0; i<checkedPositions.size(); i++) {
                                     if (checkedPositions.valueAt(i)) {
-                                        String item = messagingServicesListView.getAdapter().getItem(
+                                        item = messagingServicesListView.getAdapter().getItem(
                                                 checkedPositions.keyAt(i)).toString();
                                         Log.i(TAG,item + " was selected");
+                                        if(!itemList.contains(item))
+                                            itemList.add(item);
+                                    }else{
+                                        item = messagingServicesListView.getAdapter().getItem(
+                                                checkedPositions.keyAt(i)).toString();
+                                        Log.i(TAG,item + " is  not selected");
+                                        if(itemList.contains(item))
+                                            itemList.remove(item);
+
                                     }
                                 }
+                                Log.i(TAG,itemList.toString() + " are all selected");
                             }
 //                            switchActivities2();
                         }
@@ -104,6 +117,14 @@ public class ServicesActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 switchActivities();
+            }
+        });
+
+        View switchToSendMessageActivity = findViewById(R.id.send_message_button1);
+        switchToSendMessageActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                switchActivities2();
             }
         });
     }
@@ -147,6 +168,7 @@ public class ServicesActivity extends AppCompatActivity {
     // Switch activity to go to the messaging, 'SendText' class
     private void switchActivities2() {
         Intent switchActivityIntent = new Intent(this, SendText.class);
+        switchActivityIntent.putExtra("PLATFROMS_SELECTED", itemList.toString());
         startActivity(switchActivityIntent);
     }
 }
