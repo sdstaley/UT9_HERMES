@@ -11,7 +11,7 @@ public class SendText extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Toast.makeText(getApplicationContext(),"TEXT" + getIntent().getStringExtra("PLATFROMS_SELECTED"), Toast.LENGTH_LONG).show();
+//        Toast.makeText(getApplicationContext(),"TEXT" + getIntent().getStringExtra("PLATFROMS_SELECTED"), Toast.LENGTH_LONG).show();
         setContentView(R.layout.text_message);
         TextView textView = (TextView) findViewById(R.id.platformToSendMessage);
         textView.setText(getIntent().getStringExtra("PLATFROMS_SELECTED"));

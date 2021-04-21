@@ -2,6 +2,7 @@ package com.example.hermes;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         editTextPassword = findViewById(R.id.editTextPassword);
         buttonLogin = findViewById(R.id.buttonLogin);
 
+
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
@@ -65,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d(TAG, "signInWithEmail:success");
-                                    Toast.makeText(LoginActivity.this, "Successful login!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, "You are successfully logged in!", Toast.LENGTH_SHORT).show();
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     switchToMainActivity();
                                 } else {

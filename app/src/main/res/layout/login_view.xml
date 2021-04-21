@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#262323"
+    android:background="#000000"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -21,12 +21,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="68dp"
+        android:background="@drawable/edit_text_background"
         android:ems="10"
-        android:hint="E-Mail Address"
+        android:hint="(email address)"
         android:inputType="textEmailAddress"
         android:text="john_silver@gmail.com"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#7AFFFFFF" />
+        android:textColor="#00BCD4"
+        android:textColorHint="#7AFFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold|italic" />
 
     <EditText
         android:id="@+id/editTextPassword"
@@ -34,12 +37,15 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
+        android:background="@drawable/edit_text_background"
         android:ems="10"
-        android:hint="Password"
+        android:hint="(password)"
         android:inputType="textPassword"
         android:text="johnsilver"
-        android:textColor="#FFFFFF"
-        android:textColorHint="#7AFFFFFF" />
+        android:textColor="#00BCD4"
+        android:textColorHint="#7AFFFFFF"
+        android:textSize="20sp"
+        android:textStyle="bold|italic" />
 
     <Button
         android:id="@+id/buttonLogin"
@@ -50,6 +56,8 @@
         android:background="@drawable/buttonbackground"
         android:ems="10"
         android:text="SIGN IN"
-        app:backgroundTint="#3B56A6"></Button>
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:backgroundTint="#00BCD4"></Button>
 
 </LinearLayout>

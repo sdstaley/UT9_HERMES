@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
                                 String clickedItem = (String) (parent.getItemAtPosition(position));
                                 String documentName = viewList.get(clickedItem);
                                 switchActivities(documentName);
-                                Toast.makeText(getApplicationContext(), "You clicked on " + documentName, Toast.LENGTH_LONG ).show();
+//                                Toast.makeText(getApplicationContext(), "You clicked on " + documentName, Toast.LENGTH_LONG ).show();
                             }
                         });
 
