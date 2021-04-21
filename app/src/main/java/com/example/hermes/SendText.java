@@ -14,7 +14,7 @@ public class SendText extends Activity {
 //        Toast.makeText(getApplicationContext(),"TEXT" + getIntent().getStringExtra("PLATFROMS_SELECTED"), Toast.LENGTH_LONG).show();
         setContentView(R.layout.text_message);
         TextView textView = (TextView) findViewById(R.id.platformToSendMessage);
-        textView.setText(getIntent().getStringExtra("PLATFROMS_SELECTED"));
+        textView.setText("What would you like to send " + getIntent().getStringExtra("NAMES") + " on: (" + getIntent().getStringExtra("PLATFROMS_SELECTED") +")?");
         Button startBtn = (Button) findViewById(R.id.buttonSend);
         startBtn.setOnClickListener(new AdapterView.OnClickListener() {
             @Override
