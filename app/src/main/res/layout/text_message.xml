@@ -45,6 +45,16 @@
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
         android:textColorHint="#BABABA" />
+    <TextView
+        android:id="@+id/messageState"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_marginTop="200dp"
+        android:text=" "
+        android:textColor="#00BCD4"
+        android:textSize="50sp"></TextView>
+
 
     <Button
         android:id="@+id/buttonSend"
@@ -52,7 +62,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextMessage"
         android:layout_marginLeft="60dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="26dp"
         android:background="@drawable/buttonbackground"
         android:foregroundGravity="center"
         android:gravity="center_horizontal"
@@ -61,6 +71,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:backgroundTint="#00BCD4" />
+
 
 
 </RelativeLayout>

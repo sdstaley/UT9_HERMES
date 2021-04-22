@@ -32,6 +32,7 @@ public class ServicesActivity extends AppCompatActivity {
     public String contactsFirestore = "hermes-contacts";
     public String messagingServicesFirestore = "personal-messagingservices";
     String item;
+    String NameOfReceiver;
     private List<String> list;
     private List<String> itemList;
     private ArrayAdapter adapter;
@@ -60,6 +61,7 @@ public class ServicesActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         list = new ArrayList<>();
         itemList = new ArrayList<>();
+        NameOfReceiver = getIntent().getStringExtra("NAME");
 
 
         //Get messaging services document from each contact
@@ -169,6 +171,7 @@ public class ServicesActivity extends AppCompatActivity {
     private void switchActivities2() {
         Intent switchActivityIntent = new Intent(this, SendText.class);
         switchActivityIntent.putExtra("PLATFROMS_SELECTED", itemList.toString());
+        switchActivityIntent.putExtra("RECEIVER", NameOfReceiver);
         startActivity(switchActivityIntent);
     }
 }

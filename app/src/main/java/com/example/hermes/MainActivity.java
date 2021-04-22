@@ -130,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
     private void switchActivities( String documentNameParameter ) {
         Intent switchActivityIntent = new Intent(MainActivity.this, ServicesActivity.class);
         switchActivityIntent.putExtra("NAME", documentNameParameter);
+
         startActivity(switchActivityIntent);
     }
 }
