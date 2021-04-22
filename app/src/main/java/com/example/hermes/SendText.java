@@ -24,10 +24,13 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firestore.v1.DocumentTransform;
 
+import java.lang.reflect.Array;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class SendText extends Activity {
@@ -35,14 +38,56 @@ public class SendText extends Activity {
     String reciever;
     public String contactsFirestore = "hermes-contacts";
     public String theMessages = "messages";
-    DateTimeFormatter dtf ;
 
+    public static Object[] Dis(String t){
+        Object[] objects;
+        ArrayList<String> platforms = new ArrayList<String>(); // Create an ArrayList object
+        ArrayList<Character> singular = new ArrayList<Character>(); // Create an ArrayList object
+//        this is to converted the string returned into proper data structure
+        for (int i = 0; i < t.length(); i++){
+            char c = t.charAt(i);
+            switch (c) {
+                case ',':
 
+                    StringBuilder builder = new StringBuilder(singular.size());
+                    for(Character ch: singular)
+                    {
+                        builder.append(ch);
+                    }
+                    platforms.add(builder.toString());
+
+                    singular.clear();
+                case ']':
+
+                    StringBuilder builder2 = new StringBuilder(singular.size());
+                    for(Character ch: singular)
+                    {
+                        builder2.append(ch);
+                    }
+                    platforms.add(builder2.toString());
+                    continue;
+                case '[':
+                    continue;
+                case ' ':
+                    continue;
+                default:
+                    singular.add(c);
+            }
+
+        }
+        objects = platforms.toArray();
+        return objects;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        Object[] all = Dis(getIntent().getStringExtra("PLATFROMS_SELECTED"));
+        StringBuilder str = new StringBuilder();
+        for (Object obj : all){
+            System.out.print(obj + " ");
+            str.append(obj+" ");
+        }
 
         Toast.makeText(getApplicationContext(),"TEXT" + getIntent().getStringExtra("RECEIVER"), Toast.LENGTH_LONG).show();
         setContentView(R.layout.text_message);
@@ -60,7 +105,7 @@ public class SendText extends Activity {
                     if (document != null) {
                         Log.i("LOGGER", document.getString("name"));
                         reciever = document.getString("name");
-                        textView.setText("What would you like to send " + reciever + " on:" + getIntent().getStringExtra("PLATFROMS_SELECTED") +"?");
+                        textView.setText("What would you like to send " + reciever + " on: " + str.toString() +"?");
 
                     } else {
                         Log.i("LOGGER", "No such document");
@@ -71,7 +116,6 @@ public class SendText extends Activity {
             }
 
         });
-//        textView.setText("What would you like to send " + reciever + " on:" + getIntent().getStringExtra("PLATFROMS_SELECTED") +"?");
         Button startBtn = (Button) findViewById(R.id.buttonSend);
         startBtn.setOnClickListener(new AdapterView.OnClickListener() {
             @Override
@@ -80,17 +124,10 @@ public class SendText extends Activity {
                 Toast.makeText(getApplicationContext(),"TEXT" + theText, Toast.LENGTH_LONG).show();
                 Log.d("LOGGER",  theText.toString());
                 sendSMS(theText.toString());
-//                messageInput.setText("");
-//                feedBackText.setText("MESSAGE SENT");
+               feedBackText.setText("MESSAGE SENT");
 
             }
-            /*
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                sendSMS();
-            }
 
-             */
 
         });
     }
@@ -107,7 +144,19 @@ public class SendText extends Activity {
         data.put("recieptTime", date);
 //        I hardcoded this for simplicity,
         data.put("sender","john_silver@gmail.com");
-        data.put("chosenPlatform", Arrays.asList(getIntent().getStringExtra("PLATFROMS_SELECTED")));
+
+//        this is to make the platform into a list
+        List<String> allPlat = new ArrayList<>();
+        Object[] all = Dis(getIntent().getStringExtra("PLATFROMS_SELECTED"));
+        for (Object obj : all){
+            System.out.print(obj + " ");
+            if(obj != ""){
+                allPlat.add(obj + " ");
+            }
+
+        }
+        data.put("chosenPlatform", allPlat);
+
         db
                 .collection(contactsFirestore)
                 .document(getIntent().getStringExtra("RECEIVER"))
@@ -131,38 +180,5 @@ public class SendText extends Activity {
                 });
 
     }
-    /*
-
-    This is Sean's work... Not finished but is a start.
-
-
-    protected void sendSMS() {
-        Log.i("Send SMS", "");
-        Intent smsIntent = new Intent(Intent.ACTION_VIEW);
-
-        smsIntent.setData(Uri.parse("smsto:"));
-        smsIntent.setType("vnd.android-dir/mms-sms");
-        smsIntent.putExtra("address"  , new String ("01234"));
-        smsIntent.putExtra("sms_body"  , "Test ");
-
-        try {
-            startActivity(smsIntent);
-            finish();
-            Log.i("Finished sending SMS...", "");
-        } catch (android.content.ActivityNotFoundException ex) {
-            Toast.makeText(SendText.this,
-                    "SMS faild, please try again later.", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-
-     */
 
 }
