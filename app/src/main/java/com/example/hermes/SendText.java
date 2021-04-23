@@ -121,7 +121,7 @@ public class SendText extends Activity {
             @Override
             public void onClick(View v) {
                Editable theText =  messageInput.getText();
-                Toast.makeText(getApplicationContext(),"TEXT" + theText, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(),"TEXT: '" + theText + "' has been sent!", Toast.LENGTH_LONG ).show();
                 Log.d("LOGGER",  theText.toString());
                 sendSMS(theText.toString());
                feedBackText.setText("MESSAGE SENT");
